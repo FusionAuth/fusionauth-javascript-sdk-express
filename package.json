@@ -1,0 +1,26 @@
+{
+  "name": "fusionauth-javascript-sdk-express",
+  "version": "1.0.0",
+  "description": "An example server implementation for FusionAuth Web SDKs.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "FusionAuth",
+  "license": "Apache",
+  "dependencies": {
+    "@types/node": "^20.11.16",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "nocache": "^4.0.0",
+    "types": "^0.1.1",
+    "typescript": "^5.3.3"
+  }
+}

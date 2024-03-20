@@ -1,14 +1,23 @@
-# Example: server implementation for FusionAuth Web SDKs.
-[FusionAuth Web SDKs](https://github.com/FusionAuth/fusionauth-javascript-sdk) can be used one of 2 ways:
-1. By hosting your own server that performs the OAuth token exchange and meets the [server code requirements for FusionAuth Web SDKs](https://github.com/FusionAuth/fusionauth-javascript-sdk-express#server-code-requirements).
-2. By using the server hosted on your FusionAuth instance, i.e., not writing your own server code.
+# Example: FusionAuth Web SDKs Server Implementation
 
-If you are hosting your own server, this repo serves as an example. This example uses JavaScript and [express](https://expressjs.com/), but you can write your server however you'd like as long as it meets the [server code requirements](https://github.com/FusionAuth/fusionauth-javascript-sdk-express#server-code-requirements).
+This repository provides an example server implementation for [FusionAuth Web SDKs](https://github.com/FusionAuth/fusionauth-javascript-sdk). FusionAuth Web SDKs can be utilized in one of two ways:
+
+1. Hosting Your Own Server: Implementing a server that handles OAuth token exchange and fulfills the [server code requirements for FusionAuth Web SDKs](https://github.com/FusionAuth/fusionauth-javascript-sdk-express#server-code-requirements).
+2. Using the FusionAuth Hosted Server: Leveraging the server hosted on your FusionAuth instance, eliminating the need to write your own server code.
+
+If you opt for hosting your own server, this repository will serve as an example. The provided example is in JavaScript and utilizes [Express](https://expressjs.com/). If you opt to implement your own server you are free to use any technology stack as long as it meets the server code requirements.
 
 ## Setup
-From the root directory, run `npm install`, then `npm run start`. You should see the console output `FusionAuth example server listening on port 9000`.
+
+To get started, follow these steps:
+
+1. From the root directory, run `npm install`.
+2. Run `npm run start`.
+
+You should observe the console output `FusionAuth example server listening on port 9000`.
 
 ## Server code requirements
+
 Your server must have the following endpoints:
 
 #### `GET /app/login`
@@ -16,8 +25,8 @@ Your server must have the following endpoints:
 This endpoint must:
 
 1.  Generate PKCE code.
-    a. The code verifier should be saved in a secure HTTP-only cookie.
-    b. The code challenge is passed along
+    - The code verifier should be saved in a secure **HTTP-only** cookie.
+    - The code challenge is passed along
 2.  Encode and save `redirect_url` from react app to `state`.
 3.  Redirect browser to `/oauth2/authorize` with a `redirect_uri` to `/app/token-exchange`
 
@@ -30,22 +39,22 @@ This endpoint must:
 1.  Call
     [/oauth2/token](https://fusionauth.io/docs/v1/tech/oauth/endpoints#complete-the-authorization-code-grant-request)
     to complete the Authorization Code Grant request. The `code` comes from the request query parameter and
-    `code_verifier` should be available in the secure HTTP-only cookie, while
+    `code_verifier` should be available in the secure **HTTP-only** cookie, while
     the rest of the parameters should be set/configured on the server
     side.
 
 2.  Once the token exchange succeeds, read the `app.at` from the
-    response body and set it as a secure, HTTP-only cookie with the same
+    response body and set it as a secure, **HTTP-only** cookie with the same
     name.
 
 3.  If you wish to support refresh tokens, repeat step 2 for the
     `app.rt` cookie.
 
-4.  Save the expiration time in a readable `app.at_exp` cookie.  And save the `app.idt` id token in a readable cookie.
+4.  Save the expiration time in a readable `app.at_exp` cookie. And save the `app.idt` id token in a readable cookie.
 
 5.  Redirect browser back to encoded url saved in `state`.
 
-4.  Call
+6.  Call
     [/oauth2/userinfo](https://fusionauth.io/docs/v1/tech/oauth/endpoints#userinfo)
     to retrieve the user info object and respond back to the client with
     this object.
@@ -54,11 +63,11 @@ This endpoint must:
 
 #### `GET /app/register`
 
-This endpoint is similar to `/login`.  It must:
+This endpoint is similar to `/login`. It must:
 
 1.  Generate PKCE code.
-    a. The code verifier should be saved in a secure HTTP-only cookie.
-    b. The code challenge is passed along
+    - The code verifier should be saved in a secure **HTTP-only** cookie.
+    - The code challenge is passed along
 2.  Encode and save `redirect_url` from react app to `state`.
 3.  Redirect browser to `/oauth2/register` with a `redirect_uri` to `/app/callback`
 
@@ -77,7 +86,7 @@ This endpoint must:
 
 This endpoint must:
 
-1.  Clear the `app.at` and `app.rt` secure, HTTP-only
+1.  Clear the `app.at` and `app.rt` secure, **HTTP-only**
     cookies.
 2.  Clear the `app.at_exp` and `app.idt` secure cookies.
 3.  Redirect to `/oauth2/logout`
@@ -97,6 +106,7 @@ endpoint must:
     response.
 
 [Example implementation](https://github.com/FusionAuth/fusionauth-javascript-sdk-express/blob/main/routes/refresh.js)
+
 ## Upgrade Policy
 
 This library may periodically receive updates with bug fixes, security patches, tests, code samples, or documentation changes.

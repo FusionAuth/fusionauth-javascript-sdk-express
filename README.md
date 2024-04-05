@@ -93,7 +93,7 @@ This endpoint must:
 
 [Example implementation](https://github.com/FusionAuth/fusionauth-javascript-sdk-express/blob/main/routes/logout.js)
 
-#### `POST /app/token-refresh` (optional)
+#### `POST /app/refresh` (optional)
 
 This endpoint is necessary if you wish to use refresh tokens. This
 endpoint must:

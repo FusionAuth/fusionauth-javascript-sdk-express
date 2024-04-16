@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
   const redirect_uri = `${req.protocol}://${req.get("host")}/app/callback`;
   const queryParams = {
     client_id: req.query.client_id,
-    scope: req.query.scope,
+    scope: 'openid offline_access',
     response_type: "code",
     redirect_uri: redirect_uri,
     code_challenge: code.code_challenge,

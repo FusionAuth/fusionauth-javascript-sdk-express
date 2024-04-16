@@ -50,11 +50,13 @@ This endpoint must:
 3.  If you wish to support refresh tokens, repeat step 2 for the
     `app.rt` cookie.
 
-4.  Save the expiration time in a readable `app.at_exp` cookie. And save the `app.idt` id token in a readable cookie.
+4.  Save the expiration time in a readable `app.at_exp` cookie. This value should be represented as seconds since the epoch.
 
-5.  Redirect browser back to encoded url saved in `state`.
+5.  And save the `app.idt` id token in a readable cookie.
 
-6.  Call
+6.  Redirect browser back to encoded url saved in `state`.
+
+7.  Call
     [/oauth2/userinfo](https://fusionauth.io/docs/v1/tech/oauth/endpoints#userinfo)
     to retrieve the user info object and respond back to the client with
     this object.

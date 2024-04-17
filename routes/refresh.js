@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: getFormURLEncodedPayload({
-        'client_id': config.clientID,
+        'client_id': config.clientId,
         'client_secret': config.clientSecret,
         'grant_type': 'refresh_token',
         'refresh_token': req.cookies['app.rt'],
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
     cookie.setSecure(res, 'app.rt', refresh_token);
 
     const expires_in_ms = expires_in * 1000;
-    cookie.setReadable(res, 'app.at_exp', Date.now() + expires_in_ms, expires_in_ms);
+    cookie.setReadable(res, "app.at_exp", (Date.now() + expires_in_ms) / 1000);
     cookie.setReadable(res, "app.idt", id_token);
 
     res.sendStatus(204);

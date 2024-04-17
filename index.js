@@ -41,7 +41,7 @@ app.use(session(
 // use routes
 app.use('/app/login', require('./routes/login.js'));
 app.use('/app/callback', require('./routes/callback.js'));
-app.use('/app/refresh/:clientID', require('./routes/refresh.js'));
+app.use('/app/refresh', require('./routes/refresh.js'));
 app.use('/app/logout', require('./routes/logout.js'));
 app.use('/app/register', require('./routes/register.js'));
 app.use('/app/me', require('./routes/me.js'));

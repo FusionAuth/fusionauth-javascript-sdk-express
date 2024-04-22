@@ -56,11 +56,6 @@ This endpoint must:
 
 6.  Redirect browser back to encoded url saved in `state`.
 
-7.  Call
-    [/oauth2/userinfo](https://fusionauth.io/docs/v1/tech/oauth/endpoints#userinfo)
-    to retrieve the user info object and respond back to the client with
-    this object.
-
 [Example implementation](https://github.com/FusionAuth/fusionauth-javascript-sdk-express/blob/main/routes/callback.js)
 
 #### `GET /app/register`

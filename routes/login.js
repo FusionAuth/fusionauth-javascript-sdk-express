@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   
   const queryParams = {
       client_id: req.query.client_id,
-      scope: 'openid offline_access',
+      scope: req.query.scope ?? 'openid offline_access',
       response_type: 'code',
       redirect_uri: token_exchange_uri,
       code_challenge: code.code_challenge,

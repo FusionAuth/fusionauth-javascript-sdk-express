@@ -18,6 +18,8 @@ You should observe the console output `FusionAuth example server listening on po
 
 ## Server code requirements
 
+The endpoints described below serve as a summary of requirements and expected behaviors of each endpoint. For additional details on these endpoints you can reference the [Hosted Backend documentation](https://fusionauth.io/docs/apis/hosted-backend).
+
 Your server must have the following endpoints:
 
 #### `GET /app/login`

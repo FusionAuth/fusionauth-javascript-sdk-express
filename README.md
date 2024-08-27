@@ -27,8 +27,8 @@ Your server must have the following endpoints:
 This endpoint must:
 
 1.  Generate PKCE code.
-    - The code verifier should be saved in a secure **HTTP-only** cookie.
-    - The code challenge is passed along
+    -   The code verifier should be saved in a secure **HTTP-only** cookie.
+    -   The code challenge is passed along
 2.  Encode and save `redirect_url` from the client app to `state`.
 3.  Redirect browser to `/oauth2/authorize` with a `redirect_uri` to `/app/token-exchange`
 
@@ -65,8 +65,8 @@ This endpoint must:
 This endpoint is similar to `/login`. It must:
 
 1.  Generate PKCE code.
-    - The code verifier should be saved in a secure **HTTP-only** cookie.
-    - The code challenge is passed along
+    -   The code verifier should be saved in a secure **HTTP-only** cookie.
+    -   The code challenge is passed along
 2.  Encode and save `redirect_url` from the client app to `state`.
 3.  Redirect browser to `/oauth2/register` with a `redirect_uri` to `/app/callback`
 

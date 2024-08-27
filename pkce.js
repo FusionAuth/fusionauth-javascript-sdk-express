@@ -23,7 +23,7 @@ async function generatePKCE() {
 }
 
 function dec2hex(dec) {
-  return ('0' + dec.toString(16)).substr(-2);
+    return ('0' + dec.toString(16)).substr(-2);
 }
 
 function generateRandomString() {

@@ -1,33 +1,33 @@
-import express from "express";
+import express from 'express';
 import {
   fusionAuthClient,
   getFormURLEncodedPayload,
-} from "../fusionAuthClient.js";
-import config from "../config.js";
-import cookie from "../cookie.js";
-import redirectState from "../redirectState.js";
+} from '../fusionAuthClient.js';
+import config from '../config.js';
+import cookie from '../cookie.js';
+import redirectState from '../redirectState.js';
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  console.log("accepting request for token exchange");
+router.get('/', async (req, res) => {
+  console.log('accepting request for token exchange');
   const code = req.query.code;
   const codeVerifier = req.cookies.codeVerifier;
-  const redirect_uri = `${req.protocol}://${req.get("host")}/app/callback`;
+  const redirect_uri = `${req.protocol}://${req.get('host')}/app/callback`;
 
   try {
     // POST request to /oauth2/token endpoint
-    const fusionAuthResponse = await fusionAuthClient("/oauth2/token", {
-      method: "POST",
+    const fusionAuthResponse = await fusionAuthClient('/oauth2/token', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: getFormURLEncodedPayload({
         client_id: config.clientId,
         client_secret: config.clientSecret,
         code: code,
         code_verifier: codeVerifier,
-        grant_type: "authorization_code",
+        grant_type: 'authorization_code',
         redirect_uri: redirect_uri,
       }),
     });
@@ -35,20 +35,20 @@ router.get("/", async (req, res) => {
     const { access_token, id_token, refresh_token, expires_in } =
       fusionAuthResponse;
     if (!(access_token && refresh_token)) {
-      console.log("Either refresh token or access token is missing.");
+      console.log('Either refresh token or access token is missing.');
       res.sendStatus(503);
       return;
     }
 
-    console.log("saving tokens as cookies");
+    console.log('saving tokens as cookies');
     // save tokens as cookies
-    cookie.setSecure(res, "app.at", access_token);
-    cookie.setSecure(res, "app.rt", refresh_token);
+    cookie.setSecure(res, 'app.at', access_token);
+    cookie.setSecure(res, 'app.rt', refresh_token);
 
     const expires_in_ms = expires_in * 1000;
-    cookie.setReadable(res, "app.at_exp", (Date.now() + expires_in_ms) / 1000);
-    cookie.setReadable(res, "codeVerifier", "", 0);
-    cookie.setReadable(res, "app.idt", id_token);
+    cookie.setReadable(res, 'app.at_exp', (Date.now() + expires_in_ms) / 1000);
+    cookie.setReadable(res, 'codeVerifier', '', 0);
+    cookie.setReadable(res, 'app.idt', id_token);
 
     const redirectUrl = redirectState.generateRedirectUrlFromState(req);
 

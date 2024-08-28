@@ -4,10 +4,10 @@ export default {
     const cookieProps = {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
+      sameSite: 'lax',
     };
-    if (typeof maxAge !== "undefined") {
-      cookieProps["maxAge"] = maxAge;
+    if (typeof maxAge !== 'undefined') {
+      cookieProps['maxAge'] = maxAge;
     }
     res.cookie(name, value, cookieProps);
   },
@@ -16,10 +16,10 @@ export default {
     const cookieProps = {
       httpOnly: false,
       secure: true,
-      sameSite: "lax",
+      sameSite: 'lax',
     };
-    if (typeof maxAge !== "undefined") {
-      cookieProps["maxAge"] = maxAge;
+    if (typeof maxAge !== 'undefined') {
+      cookieProps['maxAge'] = maxAge;
     }
     res.cookie(name, value, cookieProps);
   },

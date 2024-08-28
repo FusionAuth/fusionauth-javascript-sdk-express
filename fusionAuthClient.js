@@ -1,4 +1,4 @@
-import config from "./config.js";
+import config from './config.js';
 
 const fusionAuthClient = async (endpoint, options) => {
   const url = config.fusionAuthBaseUrl + endpoint;
@@ -35,7 +35,7 @@ const getFormURLEncodedPayload = (requestBody) => {
     encoded.push(`${encodedKey}=${encodedValue}`);
   }
 
-  return encoded.join("&");
+  return encoded.join('&');
 };
 
 export { fusionAuthClient, getFormURLEncodedPayload };

@@ -6,10 +6,10 @@ const redirectState = require("../redirectState.js");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/:clientId", async (req, res) => {
   console.log("accepting request for register");
 
-  console.log(`client_id is ${req.query.client_id}`);
+  console.log(`Client ID is: ${req.params.clientId}`);
   const newState = redirectState.pushRedirectUrlToState(
     req.query.redirect_uri,
     req.query.state
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   cookie.setSecure(res, "codeVerifier", code.code_verifier);
   const redirect_uri = `${req.protocol}://${req.get("host")}/app/callback`;
   const queryParams = {
-    client_id: req.query.client_id,
+    client_id: req.params.clientId,
     scope: req.query.scope ?? "openid offline_access",
     response_type: "code",
     redirect_uri: redirect_uri,

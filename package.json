@@ -1,6 +1,6 @@
 {
   "name": "fusionauth-javascript-sdk-express",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An example server implementation for FusionAuth Web SDKs.",
   "main": "index.js",
   "engines": {

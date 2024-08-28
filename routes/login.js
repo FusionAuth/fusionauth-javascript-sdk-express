@@ -1,29 +1,34 @@
-const express = require('express');
-const config = require('../config.js');
-const cookie = require('../cookie.js');
-const pkce = require('../pkce.js');
-const redirectState = require('../redirectState.js');
+import express from "express";
+import config from "../config.js";
+import cookie from "../cookie.js";
+import pkce from "../pkce.js";
+import redirectState from "../redirectState.js";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   console.log("accepting request for login");
 
   console.log(`client_id is ${req.query.client_id}`);
-  const newState = redirectState.pushRedirectUrlToState(req.query.redirect_uri, req.query.state);
+  const newState = redirectState.pushRedirectUrlToState(
+    req.query.redirect_uri,
+    req.query.state
+  );
   console.log(`newState is ${newState}`);
   const code = await pkce.generatePKCE();
-  cookie.setSecure(res, 'codeVerifier', code.code_verifier);
-  const token_exchange_uri = `${req.protocol}://${req.get('host')}/app/callback`;
-  
+  cookie.setSecure(res, "codeVerifier", code.code_verifier);
+  const token_exchange_uri = `${req.protocol}://${req.get(
+    "host"
+  )}/app/callback`;
+
   const queryParams = {
-      client_id: req.query.client_id,
-      scope: req.query.scope ?? 'openid offline_access',
-      response_type: 'code',
-      redirect_uri: token_exchange_uri,
-      code_challenge: code.code_challenge,
-      code_challenge_method: 'S256',
-      state: newState,
+    client_id: req.query.client_id,
+    scope: req.query.scope ?? "openid offline_access",
+    response_type: "code",
+    redirect_uri: token_exchange_uri,
+    code_challenge: code.code_challenge,
+    code_challenge_method: "S256",
+    state: newState,
   };
   const fullUrl = generateUrl(queryParams);
 
@@ -31,8 +36,8 @@ router.get('/', async (req, res) => {
 });
 
 function generateUrl(queryParams) {
-    const query = new URLSearchParams(queryParams);
-    return `${config.fusionAuthBaseUrl}/oauth2/authorize?${query}`;
+  const query = new URLSearchParams(queryParams);
+  return `${config.fusionAuthBaseUrl}/oauth2/authorize?${query}`;
 }
 
-module.exports = router;
+export default router;

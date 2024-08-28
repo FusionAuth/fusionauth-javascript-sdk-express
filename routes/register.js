@@ -1,8 +1,8 @@
-const express = require("express");
-const config = require("../config.js");
-const cookie = require("../cookie.js");
-const pkce = require("../pkce.js");
-const redirectState = require("../redirectState.js");
+import express from "express";
+import config from "../config.js";
+import cookie from "../cookie.js";
+import pkce from "../pkce.js";
+import redirectState from "../redirectState.js";
 
 const router = express.Router();
 
@@ -37,4 +37,4 @@ function generateUrl(queryParams) {
   return `${config.fusionAuthBaseUrl}/oauth2/register?${query}`;
 }
 
-module.exports = router;
+export default router;

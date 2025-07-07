@@ -1,11 +1,16 @@
 const express = require('express');
 const { fusionAuthClient } = require('../fusionAuthClient.js')
+const cookie = require('../cookie.js');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   console.log('In /me...');
   const access_token = req.cookies['app.at'];
+
+  console.log(`Access token from cookie: ${access_token}`);
+  const decodedAccessToken = cookie.getDecompressedValue(access_token);
+  console.log('Decoded access token:', decodedAccessToken);       
 
   if (!access_token) {
     console.log('Access token missing')
@@ -14,7 +19,6 @@ router.get('/', async (req, res) => {
   }
 
   try {
-    // submit request to get user information
     const user = await fusionAuthClient('/oauth2/userinfo', {
       method: 'GET',
       headers: {

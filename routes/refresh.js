@@ -32,12 +32,12 @@ router.post('/', async (req, res) => {
       return
     }
 
-    cookie.setSecure(res, 'app.at', access_token);
-    cookie.setSecure(res, 'app.rt', refresh_token);
+    await cookie.setSecureCompressed(res, 'app.at', access_token);
+    await cookie.setSecureCompressed(res, 'app.rt', refresh_token);
 
     const expires_in_ms = expires_in * 1000;
     cookie.setReadable(res, "app.at_exp", (Date.now() + expires_in_ms) / 1000);
-    cookie.setReadable(res, "app.idt", id_token);
+    cookie.setReadableCompressed(res, "app.idt", id_token);
 
     res.sendStatus(204);
   } catch (error) {

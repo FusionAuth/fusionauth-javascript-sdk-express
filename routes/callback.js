@@ -3,6 +3,7 @@ const { fusionAuthClient, getFormURLEncodedPayload } = require('../fusionAuthCli
 const config = require('../config.js');
 const cookie = require('../cookie.js');
 const redirectState = require('../redirectState.js');
+const { error } = require('console');
 
 const router = express.Router();
 
@@ -38,13 +39,15 @@ router.get('/', async (req, res) => {
 
     console.log("saving tokens as cookies");
     // save tokens as cookies
-    cookie.setSecure(res, 'app.at', access_token);
+    console.log(`access_token: ${access_token}`);
+    cookie.setSecureCompressed(res, 'app.at', access_token);
+    console.log(`refresh_token: ${refresh_token}`);
     cookie.setSecure(res, 'app.rt', refresh_token);
 
     const expires_in_ms = expires_in * 1000;
     cookie.setReadable(res, 'app.at_exp', (Date.now() + expires_in_ms) / 1000);
     cookie.setReadable(res, 'codeVerifier', '', 0);
-    cookie.setReadable(res, "app.idt", id_token);
+    cookie.setReadableCompressed(res, "app.idt", id_token);
 
     const redirectUrl = redirectState.generateRedirectUrlFromState(req);
 

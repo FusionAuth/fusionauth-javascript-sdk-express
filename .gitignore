@@ -1,2 +1,4 @@
+.env
+.eslintcache
 node_modules
 yarn.lock

@@ -12,9 +12,10 @@ If you opt for hosting your own server, this repository will serve as an example
 To get started, follow these steps:
 
 1. From the root directory, run `npm install`.
-2. Run `npm run start`.
+2. Rename the `.env.example` file to `.env` and update the values with your FusionAuth details.
+3. Run `npm run start`.
 
-You should observe the console output `FusionAuth example server listening on port 9000`.
+You should observe the console output `🚀 Server running on port 9000`.
 
 ## Server code requirements
 
@@ -113,3 +114,17 @@ This library may periodically receive updates with bug fixes, security patches, 
 These releases may also update dependencies, language engines, and operating systems, as we\'ll follow the deprecation and sunsetting policies of the underlying technologies that the libraries use.
 
 This means that after a dependency (e.g. language, framework, or operating system) is deprecated by its maintainer, this library will also be deprecated by us, and may eventually be updated to use a newer version.
+
+# Change Log
+
+### 2.0.0
+
+#### Breaking Changes
+
+- Modified routes to match FusionAuth API changes in 1.45.0.
+
+#### Enhancements
+
+- Change config.js to use environment variables
+- Automatically restart the dev server when changes are detected
+- Added linting and formatting along with enforcement via pre-commit hook

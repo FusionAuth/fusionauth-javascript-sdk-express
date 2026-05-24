@@ -1,26 +1,40 @@
 {
   "name": "fusionauth-javascript-sdk-express",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An example server implementation for FusionAuth Web SDKs.",
-  "main": "index.js",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
   "keywords": [],
   "author": "FusionAuth",
   "license": "Apache",
+  "type": "module",
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "dotenvx run -f .env -- nodemon ./src/index.js",
+    "prepare": "husky"
+  },
   "dependencies": {
     "@types/node": "^20.11.16",
-    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "express-session": "^1.18.0",
-    "nocache": "^4.0.0",
-    "types": "^0.1.1",
-    "typescript": "^5.3.3"
+    "nocache": "^4.0.0"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.11.3",
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.3",
+    "typescript-eslint": "^8.3.0"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,css,md}": "prettier --write"
   }
 }
